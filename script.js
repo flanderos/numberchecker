@@ -10,24 +10,28 @@ const checkNumbers = () => {
   const numbers = numberSeries.split(",").map(Number);
 
   let lastNumber = null;
-  let missingNumber = null;
+  let missingNumbers = [];
 
   for (const num of numbers) {
     if (!isNaN(num)) {
       if (lastNumber !== null && num > lastNumber + 1) {
-        missingNumber = lastNumber + 1;
-        break;
+        const missingRange = Array.from(
+          { length: num - lastNumber - 1 },
+          (_, i) => lastNumber + 1 + i
+        );
+        missingNumbers = missingNumbers.concat(missingRange);
       }
       lastNumber = num;
     }
   }
 
-  if (missingNumber !== null) {
-    output.innerHTML = "Missing number: " + missingNumber;
+  if (missingNumbers.length > 0) {
+    const missingNumbersText = missingNumbers.join(", ");
+    output.innerHTML = "Missing numbers: " + missingNumbersText;
     output.style.color = "red";
     output.style.fontWeight = "bold";
   } else {
-    output.innerHTML = "Ingen hull i nummerserien";
+    output.innerHTML = "No missing numbers in the number series";
     output.style.color = "green";
     output.style.fontWeight = "normal";
   }
