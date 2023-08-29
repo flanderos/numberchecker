@@ -21,10 +21,6 @@ const checkNumbers = () => {
     }
   }
 
-  if ((inputField.value.length = 0)) {
-    alert("write something");
-  }
-
   if (hasHole) {
     output.innerHTML = "Siste nummer før hullet: " + lastNumber;
     output.style.color = "red";
