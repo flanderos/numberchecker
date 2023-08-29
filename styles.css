@@ -48,3 +48,17 @@ body {
     justify-content: flex-start;
   }
 
+.clearbutton {
+  height: 38px;
+  width: 100px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: none;
+}
+
+.clearbutton:hover {
+  cursor: pointer;
+}

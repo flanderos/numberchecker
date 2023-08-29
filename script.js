@@ -2,6 +2,7 @@ const inputField = document.querySelector("#text-input");
 const submitButton = document.querySelector("#submit-button");
 const output = document.querySelector(".output");
 const resultBox = document.querySelector(".result-box");
+const clearButton = document.querySelector(".clearbutton");
 
 let numArray = [];
 
@@ -30,6 +31,7 @@ const checkNumbers = () => {
     output.innerHTML = "Missing numbers: " + missingNumbersText;
     output.style.color = "red";
     output.style.fontWeight = "bold";
+    clearButton.style.display = "block";
   } else {
     output.innerHTML = "No missing numbers in the number series";
     output.style.color = "green";
@@ -37,4 +39,10 @@ const checkNumbers = () => {
   }
 };
 
+const clearNumbers = () => {
+  output.innerHTML = "";
+  inputField.value = "";
+};
+
 submitButton.addEventListener("click", checkNumbers);
+clearButton.addEventListener("click", clearNumbers);
