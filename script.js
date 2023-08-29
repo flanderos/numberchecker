@@ -21,10 +21,16 @@ const checkNumbers = () => {
     }
   }
 
+  if ((inputField.value.length = 0)) {
+    alert("write something");
+  }
+
   if (hasHole) {
     output.innerHTML = "Siste nummer før hullet: " + lastNumber;
+    output.style.color = "red";
   } else {
-    output.innerHTML = "Ok";
+    output.innerHTML = "Ingen hull i nummerserien";
+    output.style.color = "green";
   }
 };
 
