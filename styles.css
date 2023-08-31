@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color:rgb(205, 205, 205);
+    background-color:rgb(235, 235, 235);
     margin: 0;
   }
 
@@ -58,7 +58,6 @@ body {
   .output {
     width: 350px;
     height: 200px;
-    border: 1px solid #ccc;
     margin-top: 20px;
     display: flex;
     justify-content: flex-start;
