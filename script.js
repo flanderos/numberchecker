@@ -73,27 +73,41 @@ function checkZettleSeries() {
 
   const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
   const monthsWith30Days = [4, 6, 9, 11];
+  const monthWith28Days = [2];
+
+  let prevMonth = -1; // For å håndtere overgangen mellom måneder
 
   for (let i = 0; i < zettleNumbers.length - 1; i++) {
     const diff = zettleNumbers[i + 1] - zettleNumbers[i];
     const lastTwoDigits = zettleNumbers[i] % 100; // Få de siste to sifrene
+    const day = lastTwoDigits % 100; // Få dagen
+    const month = Math.floor(lastTwoDigits / 100) % 100; // Få måneden
 
-    const day = lastTwoDigits % 31; // Få dagen
+    if (prevMonth !== month) {
+      // Håndter overgangen til ny måned
+      prevMonth = month;
+    }
 
     if (
       diff > 1 ||
       (lastTwoDigits >= 31 && lastTwoDigits <= 99) ||
       (lastTwoDigits === 0 && zettleNumbers[i] !== 0) || // Sjekk om tallet er 0, men ikke hvis det er 0 selv
       (lastTwoDigits === 99 && zettleNumbers[i] % 100 !== 0) || // Sjekk om tallet slutter på 00, men ikke hvis det er 0 selv
-      (monthsWith31Days.includes(day) && day === 31) || // Sjekk for måneder med 31 dager og dag 31
-      (monthsWith30Days.includes(day) && day === 30) // Sjekk for måneder med 30 dager og dag 30
+      (monthsWith31Days.includes(month) && day === 31) || // Sjekk for måneder med 31 dager og dag 31
+      (monthsWith30Days.includes(month) && day === 30) ||
+      (monthWith28Days.includes(month) && day === 28) // Sjekk for måneder med 30 dager og dag 30
     ) {
       for (let j = 1; j < diff; j++) {
         const nextNumber = zettleNumbers[i] + j;
         const nextTwoDigits = nextNumber % 100;
         const nextTenDigits = nextNumber % 10; // Få det siste sifferet
 
-        if ((nextTwoDigits < 31 || nextTwoDigits > 99) && nextTenDigits !== 0) {
+        if (
+          (nextTwoDigits < 31 || nextTwoDigits > 99) &&
+          nextTwoDigits !== 29 &&
+          nextTwoDigits !== 30 &&
+          nextTwoDigits !== 31
+        ) {
           missingNumbers.push(nextNumber);
         }
       }
